@@ -1,12 +1,125 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, 'Open Sans';
+    font-size: 16px;
+    text-align: center;
+    background-image: url('assets/background_image_Quizshow.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    width: 357px;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    height: 8vh;
+    width: 100%;
+    align-items: center;
+}
+
+.headerContainer {
+    width: 357px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+header h1 {
+    font-family: 'Marker Felt';
+    color: #000000;
+}
+
+#instructionsModalBtn {
+    height: 25px;
+    width: auto;
+}
+section {
+    width: 100%;
+    display: flex;
+    height: 92vh;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.quoteContainer {
+    background-image: url('assets/speech_bubble.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 30vh;
+    width: 90vw;
+    margin: 30px 0 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quoteContainer p {
+    font-style: italic;
+    width: 290px;
+}
+
+.btnContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    height: 275px;
+    justify-content: space-evenly;
+
+}
+
+.btnContainer button {
+    height: 55px;
+    width: 94%;
+    box-shadow: 0px 0px 3px 1px #000500;;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+}
+
+.nextBtn {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    height: 10vh;
+    justify-content: center;
+}
+
+.nextBtn button {
+    height: 40px;
+    width: 75px;
+    border-color: #B7B7B7;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    background-color: #63666A;
+}
+
 /* The Modal (background) */
 .instructionsModal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
+    justify-content: center;
     z-index: 1; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    height: 100%;
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -15,11 +128,16 @@
   /* Modal Content/Box */
   .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    position: fixed;
+    margin-top: 200px;
     padding: 20px;
     border: 1px solid #b7b7b7;
-    width: 80%; /* Could be more or less, depending on screen size */
+    min-width: 350px; /* Could be more or less, depending on screen size */
+    max-width: 400px;
+    height: 300px;
     border-radius: 10px;
+    font-size: 12px;
+    text-align: left;
   }
   
   /* The Close Button */
@@ -43,7 +161,7 @@
 }
 
 .modal-content ul {
-    line-height: 2;
+    line-height: 1.5;
 }
 
 .instructionsWelcomeText {
