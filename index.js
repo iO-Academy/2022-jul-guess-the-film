@@ -1,5 +1,3 @@
-
-
 // Modal functionality
 let modal = document.getElementById("instructionsModal");
 let btn = document.getElementById("instructionsModalBtn");
