@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html lang="en-gb">
 <head>
-    <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="normalize.css" type="text/css" rel="stylesheet" />
-	<link href="style.css" type="text/css" rel="stylesheet" />
-    <script src='index.js' defer></script>
-	<title>Quotlefish - A movie game</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="normalize.css" type="text/css" rel="stylesheet" />
+  <link href="style.css" type="text/css" rel="stylesheet" />
+  <script src='index.js' defer></script>
+  <title>Quotlefish - A movie game</title>
 </head>
 <body>
 	<header>
 		<div>
 			<h1>Quotlefish</h1>
 		</div>
-		<div class="instructionsModalBtn">
+		<img src="assets/info.png" id="instructionsModalBtn"/>
+		<!-- The Modal -->
+		<div id="instructionsModal" class="instructionsModal">
+			<!-- Modal content -->
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<p class="instructionsWelcomeText">Welcome to Quotlefish, our guess the film game!</p>
+				<p class="instructionsTitle">Instructions</p>
+				<ul>
+					<li>You will be given 3 film titles</li>
+					<li>Match the quote to the current film</li>
+					<li>Correct answers show green, incorrect go red</li>
+					<li>You have one attempt to get the right answer</li>
+					<li>After answering, click next to get a new quote</li>
+					<li>Lights, camera, action!</li>
+				</ul>
+			</div>
 		</div>
 	</header>
 	<main>
@@ -32,3 +48,4 @@
 		</section>
 	</main>	
 </body>
+</html>
