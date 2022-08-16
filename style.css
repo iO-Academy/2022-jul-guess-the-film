@@ -169,3 +169,17 @@ section {
     margin-left: 25px;
     font-size: 1.4rem;
 }
+
+.landscape {
+    display: none;
+}
+
+@media only screen and (orientation:landscape) {
+    header, main {
+      display: none;
+    }
+
+    .landscape {
+        display: block;
+    }
+  }
