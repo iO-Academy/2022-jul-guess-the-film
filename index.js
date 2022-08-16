@@ -4,7 +4,7 @@ let btn = document.getElementById("instructionsModalBtn");
 let span = document.getElementsByClassName("close")[0];
 // When the user clicks on the button, open the modal
 btn.addEventListener('click', () => {
-  modal.style.display = "block";
+  modal.style.display = "flex";
 })
 // When the user clicks on <span> (x), close the modal
 span.addEventListener('click', () => {
