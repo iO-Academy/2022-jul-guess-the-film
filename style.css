@@ -67,7 +67,7 @@ section {
 .quoteContainer p {
     font-style: italic;
     width: 290px;
-    margin: 50px;
+    margin: 50px 0;
 }
 
 .btnContainer {
@@ -123,11 +123,10 @@ section {
   .modalContent {
     background-color: #fefefe;
     position: fixed;
-    margin-top: 200px;
+    margin-top: 15vh;
     padding: 20px;
     border: 1px solid #b7b7b7;
-    min-width: 350px; 
-    max-width: 400px;
+    width: 350px; 
     height: 300px;
     border-radius: 10px;
     font-size: 12px;
