@@ -19,6 +19,7 @@ fetch('quotes.json')
   return data.json()
 })
   .then((apiResponse) => {
+    disableButton(next_button)
     shuffleArray(apiResponse.films)
     let threeFilms = apiResponse.films.slice(0, 3)
     let winningFilmObject = threeFilms[0]
@@ -26,9 +27,6 @@ fetch('quotes.json')
     createQuote(winningFilmObject)
     threeFilms.forEach(createTitleButtons)
     checkAnswer()
-  })
-  .then(() => {
-    enableNextButton()
   })
 
 const createTitleButtons = (oneFilm) => {
@@ -38,7 +36,6 @@ const createTitleButtons = (oneFilm) => {
   button_tag.appendChild(button_text)
   button_tag.classList.add('answerBtn')
   document.querySelector('#btnContainer').appendChild(button_tag)
-  button_tag.classList.add('answerButton')
   if(p_tag.textContent === oneFilm.quote) {
     button_tag.dataset.winner = true
   } else {
@@ -52,6 +49,8 @@ const checkAnswer = () => {
       console.log(answerBtn)
       answerBtn.addEventListener('click', () => {
         answerBtns.disabled = true
+        enableButton(next_button)
+        console.log('hello')
         if (answerBtn.dataset.winner === 'true' && !buttonClicked){
           answerBtn.style.backgroundColor = "#98d03b"
         } else if (answerBtn.dataset.winner === 'false' && !buttonClicked) {
@@ -87,16 +86,4 @@ const disableButton = (button) => {
 const enableButton = (button) => {
   button.disabled = false
   button.style.opacity = 1
-}
-
-disableButton(next_button)
-
-const enableNextButton = () => {
-  let answer_buttons = document.querySelectorAll('.answerButton')
-      answer_buttons.forEach((button) => {
-        button.addEventListener('click', () => {
-          enableButton(next_button)
-          console.log('hello')
-        })
-      })
 }
