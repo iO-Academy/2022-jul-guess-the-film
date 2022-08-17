@@ -32,6 +32,7 @@ const createTitleButtons = (oneFilm) => {
   let button_text = document.createTextNode(oneFilm.title)
   button_tag.appendChild(button_text)
   document.querySelector('#btnContainer').appendChild(button_tag)
+  button_tag.classList.add('answerButton')
   if(p_tag.textContent === oneFilm.quote) {
     button_tag.dataset.winner = true
   } else {
@@ -53,3 +54,7 @@ const shuffleArray = (array) => {
   }
     return array;
 }
+
+let next_button = document.getElementById('next')
+
+next_button.disable = true
