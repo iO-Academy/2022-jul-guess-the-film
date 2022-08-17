@@ -25,6 +25,15 @@ fetch('quotes.json')
     createQuote(winningFilmObject)
     threeFilms.forEach(createTitleButtons)
   })
+  .then(() => {
+    let answer_buttons = document.querySelectorAll('.answerButton')
+    answer_buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        enableButton(next_button)
+        console.log('hello')
+      })
+    })
+  })
 
 const createTitleButtons = (oneFilm) => {
   let p_tag = document.querySelector('#quote')
@@ -68,6 +77,3 @@ const enableButton = (button) => {
 }
 
 disableButton(next_button)
-
-document.querySelectorAll('.answerButton')
-
