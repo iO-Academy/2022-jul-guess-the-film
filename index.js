@@ -19,6 +19,7 @@ fetch('quotes.json')
   return data.json()
 })
   .then((apiResponse) => {
+    disableButton(next_button)
     shuffleArray(apiResponse.films)
     let threeFilms = apiResponse.films.slice(0, 3)
     let winningFilmObject = threeFilms[0]
@@ -48,6 +49,8 @@ const checkAnswer = () => {
       console.log(answerBtn)
       answerBtn.addEventListener('click', () => {
         answerBtns.disabled = true
+        enableButton(next_button)
+        console.log('hello')
         if (answerBtn.dataset.winner === 'true' && !buttonClicked){
           answerBtn.style.backgroundColor = "#98d03b"
         } else if (answerBtn.dataset.winner === 'false' && !buttonClicked) {
@@ -71,4 +74,16 @@ const shuffleArray = (array) => {
       array[j] = temp;
   }
     return array;
+}
+
+let next_button = document.getElementById('next')
+
+const disableButton = (button) => {
+  button.disabled = true
+  button.style.opacity = 0.4
+}
+
+const enableButton = (button) => {
+  button.disabled = false
+  button.style.opacity = 1
 }
