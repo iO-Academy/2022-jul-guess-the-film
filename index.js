@@ -17,15 +17,14 @@ fetch('quotes.json')
   .then((data) => {
   return data.json()
 })
-
-.then((apiResponse) => {
-  shuffleArray(apiResponse.films)
-  let threeFilms = apiResponse.films.slice(0, 3)
-  let winningFilmObject = threeFilms[0]
-  shuffleArray(threeFilms)
-  createQuote(winningFilmObject)
-  threeFilms.forEach(createTitleButtons)
-})
+  .then((apiResponse) => {
+    shuffleArray(apiResponse.films)
+    let threeFilms = apiResponse.films.slice(0, 3)
+    let winningFilmObject = threeFilms[0]
+    shuffleArray(threeFilms)
+    createQuote(winningFilmObject)
+    threeFilms.forEach(createTitleButtons)
+  })
 
 const createTitleButtons = (oneFilm) => {
   let p_tag = document.querySelector('#quote')
@@ -40,13 +39,12 @@ const createTitleButtons = (oneFilm) => {
   }
 }
   
- 
 const createQuote = (winningFilmObject) => {
   let p_text = document.createTextNode(winningFilmObject.quote)
   document.querySelector('#quote').appendChild(p_text)
 }
 
-const shuffleArray = array => {
+const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       const temp = array[i];
