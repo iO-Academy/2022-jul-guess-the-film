@@ -1,7 +1,9 @@
-let modal = document.getElementById("instructionsModal");
-let btn = document.getElementById("instructionsModalBtn");
-let span = document.getElementsByClassName("close")[0];
+const modal = document.getElementById("instructionsModal");
+const btn = document.getElementById("instructionsModalBtn");
+const span = document.getElementsByClassName("close")[0];
 let buttonClicked = false
+const next_button = document.getElementById('next')
+
 btn.addEventListener('click', () => {
   modal.style.display = "flex";
 })
@@ -27,7 +29,34 @@ fetch('quotes.json')
     createQuote(winningFilmObject)
     threeFilms.forEach(createTitleButtons)
     checkAnswer()
+})
+
+next_button.addEventListener('click', () => {
+  fetch('quotes.json')
+  .then((data) => {
+  return data.json()
+})
+  .then((apiResponse) => {
+    removeLastMovies()
+    disableButton(next_button)
+    shuffleArray(apiResponse.films)
+    let threeFilms = apiResponse.films.slice(0, 3)
+    let winningFilmObject = threeFilms[0]
+    shuffleArray(threeFilms)
+    createQuote(winningFilmObject)
+    threeFilms.forEach(createTitleButtons)
+    checkAnswer()
   })
+})
+
+const removeLastMovies = () => {
+  buttonClicked = false
+  document.querySelector('#quote').innerHTML = ''
+  let buttons = document.querySelectorAll('.answerBtn')
+    buttons.forEach((button) => {
+      button.remove()
+    })
+}
 
 const createTitleButtons = (oneFilm) => {
   let p_tag = document.querySelector('#quote')
@@ -45,20 +74,18 @@ const createTitleButtons = (oneFilm) => {
 
 const checkAnswer = () => {
   let answerBtns = document.querySelectorAll('.answerBtn')
-    answerBtns.forEach((answerBtn) => {
-      console.log(answerBtn)
-      answerBtn.addEventListener('click', () => {
-        answerBtns.disabled = true
-        enableButton(next_button)
-        console.log('hello')
-        if (answerBtn.dataset.winner === 'true' && !buttonClicked){
-          answerBtn.style.backgroundColor = "#98d03b"
-        } else if (answerBtn.dataset.winner === 'false' && !buttonClicked) {
-          answerBtn.style.backgroundColor = "#d94536"
-        } 
-        buttonClicked = true
-      })
+  answerBtns.forEach((answerBtn) => {
+  answerBtn.addEventListener('click', () => {
+    answerBtns.disabled = true
+    enableButton(next_button)
+    if (answerBtn.dataset.winner === 'true' && !buttonClicked){
+      answerBtn.style.backgroundColor = "#98d03b"
+    } else if (answerBtn.dataset.winner === 'false' && !buttonClicked) {
+      answerBtn.style.backgroundColor = "#d94536"
+    } 
+      buttonClicked = true
     })
+  })
 }
 
 const createQuote = (winningFilmObject) => {
@@ -68,15 +95,13 @@ const createQuote = (winningFilmObject) => {
 
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
   }
-    return array;
+  return array;
 }
-
-let next_button = document.getElementById('next')
 
 const disableButton = (button) => {
   button.disabled = true
