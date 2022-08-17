@@ -46,7 +46,7 @@ const checkAnswer = () => {
   let answerBtns = document.querySelectorAll('.answerBtn')
     answerBtns.forEach((answerBtn) => {
       console.log(answerBtn)
-      answerBtn.addEventListener('click', (e) => {
+      answerBtn.addEventListener('click', () => {
         answerBtns.disabled = true
         if (answerBtn.dataset.winner === 'true' && !buttonClicked){
           answerBtn.style.backgroundColor = "#98d03b"
