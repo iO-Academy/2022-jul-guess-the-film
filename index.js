@@ -3,7 +3,6 @@ const btn = document.getElementById("instructionsModalBtn");
 const span = document.getElementsByClassName("close")[0];
 let buttonClicked = false
 const next_button = document.getElementById('next')
-let lastQuote = ""
 
 btn.addEventListener('click', () => {
   modal.style.display = "flex";
