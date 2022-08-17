@@ -31,22 +31,27 @@ fetch('quotes.json')
     checkAnswer()
 })
 
+
 next_button.addEventListener('click', () => {
-  fetch('quotes.json')
-  .then((data) => {
-  return data.json()
-})
-  .then((apiResponse) => {
-    removeLastMovies()
-    disableButton(next_button)
-    shuffleArray(apiResponse.films)
-    let threeFilms = apiResponse.films.slice(0, 3)
-    let winningFilmObject = threeFilms[0]
-    shuffleArray(threeFilms)
-    createQuote(winningFilmObject)
-    threeFilms.forEach(createTitleButtons)
-    checkAnswer()
-  })
+    lastQuote = document.getElementById('quote').textContent
+    fetch('quotes.json')
+    .then((data) => {
+        return data.json()
+    })
+    .then((apiResponse) => {
+        disableButton(next_button)
+        shuffleArray(apiResponse.films)
+        let threeFilms = apiResponse.films.slice(0, 3)
+        let winningFilmObject = threeFilms[0]
+        if(winningFilmObject.quote == lastQuote) {
+            winningFilmObject = threeFilms[1]
+        }
+        shuffleArray(threeFilms)
+        removeLastMovies()
+        createQuote(winningFilmObject)
+        threeFilms.forEach(createTitleButtons)
+        checkAnswer()
+    })
 })
 
 const removeLastMovies = () => {
@@ -75,17 +80,22 @@ const createTitleButtons = (oneFilm) => {
 const checkAnswer = () => {
   let answerBtns = document.querySelectorAll('.answerBtn')
   answerBtns.forEach((answerBtn) => {
-  answerBtn.addEventListener('click', () => {
-    answerBtns.disabled = true
-    enableButton(next_button)
-    if (answerBtn.dataset.winner === 'true' && !buttonClicked){
-      answerBtn.style.backgroundColor = "#98d03b"
-    } else if (answerBtn.dataset.winner === 'false' && !buttonClicked) {
-      answerBtn.style.backgroundColor = "#d94536"
-    } 
-      buttonClicked = true
+        answerBtn.addEventListener('click', (e) => {
+            answerBtns.disabled = true
+            enableButton(next_button)
+            if (answerBtn.dataset.winner === 'true' && !buttonClicked){
+            answerBtn.style.backgroundColor = "#98d03b"
+            } else if (answerBtn.dataset.winner === 'false' && !buttonClicked) {
+            answerBtn.style.backgroundColor = "#d94536"
+            } 
+            answerBtns.forEach((button) => {
+                if(e.target != button) {
+                    disableButton(button)
+                }
+            })
+            buttonClicked = true
+        })
     })
-  })
 }
 
 const createQuote = (winningFilmObject) => {
