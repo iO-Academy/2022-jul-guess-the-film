@@ -24,6 +24,7 @@ fetch('quotes.json')
     shuffleArray(threeFilms)
     createQuote(winningFilmObject)
     threeFilms.forEach(createTitleButtons)
+    checkAnswer()
   })
 
 const createTitleButtons = (oneFilm) => {
@@ -31,6 +32,7 @@ const createTitleButtons = (oneFilm) => {
   let button_tag = document.createElement('button')
   let button_text = document.createTextNode(oneFilm.title)
   button_tag.appendChild(button_text)
+  button_tag.classList.add('answerBtn')
   document.querySelector('#btnContainer').appendChild(button_tag)
   if(p_tag.textContent === oneFilm.quote) {
     button_tag.dataset.winner = true
@@ -38,7 +40,21 @@ const createTitleButtons = (oneFilm) => {
     button_tag.dataset.winner = false
   }
 }
-  
+
+const checkAnswer = () => {
+let answerBtns = document.querySelectorAll('.answerBtn')
+answerBtns.forEach((answerBtn) => {
+  console.log(answerBtn)
+  answerBtn.addEventListener('click', (e) => {
+  if (answerBtn.dataset.winner == 'true'){
+    answerBtn.style.backgroundColor = "#98d03b"
+  } else {
+    answerBtn.style.backgroundColor = "#d94536"
+  }
+})
+})
+}
+
 const createQuote = (winningFilmObject) => {
   let p_text = document.createTextNode(winningFilmObject.quote)
   document.querySelector('#quote').appendChild(p_text)
