@@ -1,6 +1,7 @@
 let modal = document.getElementById("instructionsModal");
 let btn = document.getElementById("instructionsModalBtn");
 let span = document.getElementsByClassName("close")[0];
+let buttonClicked = false
 btn.addEventListener('click', () => {
   modal.style.display = "flex";
 })
@@ -42,17 +43,19 @@ const createTitleButtons = (oneFilm) => {
 }
 
 const checkAnswer = () => {
-let answerBtns = document.querySelectorAll('.answerBtn')
-answerBtns.forEach((answerBtn) => {
-  console.log(answerBtn)
-  answerBtn.addEventListener('click', (e) => {
-  if (answerBtn.dataset.winner == 'true'){
-    answerBtn.style.backgroundColor = "#98d03b"
-  } else {
-    answerBtn.style.backgroundColor = "#d94536"
-  }
-})
-})
+  let answerBtns = document.querySelectorAll('.answerBtn')
+    answerBtns.forEach((answerBtn) => {
+      console.log(answerBtn)
+      answerBtn.addEventListener('click', (e) => {
+        answerBtns.disabled = true
+        if (answerBtn.dataset.winner === 'true' && !buttonClicked){
+          answerBtn.style.backgroundColor = "#98d03b"
+        } else if (answerBtn.dataset.winner === 'false' && !buttonClicked) {
+          answerBtn.style.backgroundColor = "#d94536"
+        } 
+        buttonClicked = true
+      })
+    })
 }
 
 const createQuote = (winningFilmObject) => {
