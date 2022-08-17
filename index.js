@@ -26,13 +26,7 @@ fetch('quotes.json')
     threeFilms.forEach(createTitleButtons)
   })
   .then(() => {
-    let answer_buttons = document.querySelectorAll('.answerButton')
-    answer_buttons.forEach((button) => {
-      button.addEventListener('click', () => {
-        enableButton(next_button)
-        console.log('hello')
-      })
-    })
+    enableNextButton()
   })
 
 const createTitleButtons = (oneFilm) => {
@@ -77,3 +71,13 @@ const enableButton = (button) => {
 }
 
 disableButton(next_button)
+
+const enableNextButton = () => {
+  let answer_buttons = document.querySelectorAll('.answerButton')
+      answer_buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          enableButton(next_button)
+          console.log('hello')
+        })
+      })
+}
