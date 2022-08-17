@@ -1,6 +1,7 @@
 let modal = document.getElementById("instructionsModal");
 let btn = document.getElementById("instructionsModalBtn");
 let span = document.getElementsByClassName("close")[0];
+let buttonClicked = false
 btn.addEventListener('click', () => {
   modal.style.display = "flex";
 })
@@ -24,6 +25,7 @@ fetch('quotes.json')
     shuffleArray(threeFilms)
     createQuote(winningFilmObject)
     threeFilms.forEach(createTitleButtons)
+    checkAnswer()
   })
 
 const createTitleButtons = (oneFilm) => {
@@ -31,6 +33,7 @@ const createTitleButtons = (oneFilm) => {
   let button_tag = document.createElement('button')
   let button_text = document.createTextNode(oneFilm.title)
   button_tag.appendChild(button_text)
+  button_tag.classList.add('answerBtn')
   document.querySelector('#btnContainer').appendChild(button_tag)
   if(p_tag.textContent === oneFilm.quote) {
     button_tag.dataset.winner = true
@@ -38,7 +41,23 @@ const createTitleButtons = (oneFilm) => {
     button_tag.dataset.winner = false
   }
 }
-  
+
+const checkAnswer = () => {
+  let answerBtns = document.querySelectorAll('.answerBtn')
+    answerBtns.forEach((answerBtn) => {
+      console.log(answerBtn)
+      answerBtn.addEventListener('click', () => {
+        answerBtns.disabled = true
+        if (answerBtn.dataset.winner === 'true' && !buttonClicked){
+          answerBtn.style.backgroundColor = "#98d03b"
+        } else if (answerBtn.dataset.winner === 'false' && !buttonClicked) {
+          answerBtn.style.backgroundColor = "#d94536"
+        } 
+        buttonClicked = true
+      })
+    })
+}
+
 const createQuote = (winningFilmObject) => {
   let p_text = document.createTextNode(winningFilmObject.quote)
   document.querySelector('#quote').appendChild(p_text)
