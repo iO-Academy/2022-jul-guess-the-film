@@ -57,4 +57,17 @@ const shuffleArray = (array) => {
 
 let next_button = document.getElementById('next')
 
-next_button.disable = true
+const disableButton = (button) => {
+  button.disabled = true
+  button.style.opacity = 0.4
+}
+
+const enableButton = (button) => {
+  button.disabled = false
+  button.style.opacity = 1
+}
+
+disableButton(next_button)
+
+document.querySelectorAll('.answerButton')
+
