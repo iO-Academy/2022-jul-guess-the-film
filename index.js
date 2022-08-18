@@ -3,6 +3,14 @@ const btn = document.getElementById("instructionsModalBtn");
 const span = document.getElementsByClassName("close")[0];
 let buttonClicked = false
 const next_button = document.getElementById('next')
+let hint = document.querySelector('#hint')
+let hintAnswer = document.querySelector('#hintAnswer')
+
+hint.addEventListener('click', () => {
+  hintAnswer.style.display = 'block'
+  disableButton(hint)
+
+  })
 
 btn.addEventListener('click', () => {
   modal.style.display = "flex";
@@ -34,6 +42,9 @@ fetch('quotes.json')
 
 next_button.addEventListener('click', () => {
     lastQuote = document.getElementById('quote').textContent
+    hintAnswer.style.display = 'none'
+    enableButton(hint)
+    
     fetch('quotes.json')
     .then((data) => {
         return data.json()
@@ -57,6 +68,7 @@ next_button.addEventListener('click', () => {
 const removeLastMovies = () => {
   buttonClicked = false
   document.querySelector('#quote').innerHTML = ''
+  hintAnswer.innerHTML = 'Release Year: '
   let buttons = document.querySelectorAll('.answerBtn')
     buttons.forEach((button) => {
       button.remove()
@@ -101,6 +113,8 @@ const checkAnswer = () => {
 const createQuote = (winningFilmObject) => {
   let p_text = document.createTextNode(winningFilmObject.quote)
   document.querySelector('#quote').appendChild(p_text)
+  let hint_text = document.createTextNode(winningFilmObject.year)
+  hintAnswer.appendChild(hint_text)
 }
 
 const shuffleArray = (array) => {
@@ -122,3 +136,5 @@ const enableButton = (button) => {
   button.disabled = false
   button.style.opacity = 1
 }
+
+
