@@ -129,6 +129,11 @@ const enableButton = (button) => {
 
 const increment5 = (score) => {
   if (score %5 === 0) {
-    document.querySelector('.scoreCounter').style.fontSize = '1.5rem'
+    document.querySelector('.scoreCounter').style.fontSize = '2rem'
+    document.querySelector('.scoreCounter').style.color = '#7274ce'
+    setTimeout(() => {
+      document.querySelector('.scoreCounter').style.fontSize = '1rem'
+      document.querySelector('.scoreCounter').style.color = '#000000'
+    }, 2000)
   }
 }
