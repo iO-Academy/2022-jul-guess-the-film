@@ -88,6 +88,7 @@ const checkAnswer = () => {
             answerBtn.style.backgroundColor = "#98d03b"
             score ++
             document.querySelector('.scoreCounter').textContent = score
+            increment5(score)
             } else if (answerBtn.dataset.winner === 'false' && !buttonClicked) {
             answerBtn.style.backgroundColor = "#d94536"
             } 
@@ -124,4 +125,10 @@ const disableButton = (button) => {
 const enableButton = (button) => {
   button.disabled = false
   button.style.opacity = 1
+}
+
+const increment5 = (score) => {
+  if (score %5 === 0) {
+    document.querySelector('.scoreCounter').style.fontSize = '1.5rem'
+  }
 }
