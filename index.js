@@ -87,7 +87,7 @@ const checkAnswer = () => {
             if (answerBtn.dataset.winner === 'true' && !buttonClicked){
             answerBtn.style.backgroundColor = "#98d03b"
             score ++
-            console.log(score)
+            document.querySelector('.scoreCounter').textContent = score
             } else if (answerBtn.dataset.winner === 'false' && !buttonClicked) {
             answerBtn.style.backgroundColor = "#d94536"
             } 
