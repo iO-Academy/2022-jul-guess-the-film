@@ -29,7 +29,6 @@ const playGame = () => {
 })
 }
 
-//start the game
 startBtn.addEventListener('click', () => {
     splashScreen.style.display = 'none'
     document.querySelector('main').style.visibility = 'visible'
