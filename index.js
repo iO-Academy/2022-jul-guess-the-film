@@ -5,11 +5,12 @@ let buttonClicked = false
 const next_button = document.getElementById('next')
 let hint = document.querySelector('#hint')
 let hintAnswer = document.querySelector('#hintAnswer')
+let score = 0
+let guesses = 0
 
 hint.addEventListener('click', () => {
   hintAnswer.style.display = 'block'
   disableButton(hint)
-
   })
 
 btn.addEventListener('click', () => {
@@ -38,7 +39,6 @@ fetch('quotes.json')
     threeFilms.forEach(createTitleButtons)
     checkAnswer()
 })
-
 
 next_button.addEventListener('click', () => {
     lastQuote = document.getElementById('quote').textContent
@@ -92,21 +92,27 @@ const createTitleButtons = (oneFilm) => {
 const checkAnswer = () => {
   let answerBtns = document.querySelectorAll('.answerBtn')
   answerBtns.forEach((answerBtn) => {
-        answerBtn.addEventListener('click', (e) => {
-            answerBtns.disabled = true
-            enableButton(next_button)
-            if (answerBtn.dataset.winner === 'true' && !buttonClicked){
-            answerBtn.style.backgroundColor = "#98d03b"
-            } else if (answerBtn.dataset.winner === 'false' && !buttonClicked) {
-            answerBtn.style.backgroundColor = "#d94536"
-            } 
-            answerBtns.forEach((button) => {
-                if(e.target != button) {
-                    disableButton(button)
-                }
-            })
-            buttonClicked = true
-        })
+    answerBtn.addEventListener('click', (e) => {
+      answerBtns.disabled = true
+      enableButton(next_button)
+      if (answerBtn.dataset.winner === 'true' && !buttonClicked){
+        answerBtn.style.backgroundColor = "#98d03b"
+        score ++
+        guesses ++
+        updateScore(score, guesses)
+        increment5(score)
+      } else if (answerBtn.dataset.winner === 'false' && !buttonClicked) {
+        answerBtn.style.backgroundColor = "#d94536"
+        guesses ++
+        updateScore(score, guesses)
+      } 
+      answerBtns.forEach((button) => {
+        if(e.target != button) {
+          disableButton(button)
+        }
+      })
+        buttonClicked = true
+      })
     })
 }
 
@@ -137,4 +143,17 @@ const enableButton = (button) => {
   button.style.opacity = 1
 }
 
+const increment5 = (score) => {
+  if (score %5 === 0) {
+    document.querySelector('.scoreContainer h5').style.fontSize = '2rem'
+    document.querySelector('.scoreContainer h5').style.color = '#D325BF'
+    setTimeout(() => {
+      document.querySelector('.scoreContainer h5').style.fontSize = '1rem'
+      document.querySelector('.scoreContainer h5').style.color = '#000000'
+    }, 750)
+  }
+}
 
+const updateScore = (score, guesses) => {
+  document.querySelector('.scoreCounter').textContent = score + "/" + guesses
+}
