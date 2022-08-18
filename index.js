@@ -18,8 +18,6 @@ startBtn.addEventListener('click', () => {
     score = 0
     guesses = 0
     counter = 30
-    console.log(score)
-    console.log(guesses)
     updateScore(score, guesses)
     const timer = setInterval(()=> {
       if(counter === 0) {
