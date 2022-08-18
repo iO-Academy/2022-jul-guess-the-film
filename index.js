@@ -4,6 +4,7 @@ const span = document.getElementsByClassName("close")[0];
 let buttonClicked = false
 const next_button = document.getElementById('next')
 let score = 0
+let guesses = 0
 
 btn.addEventListener('click', () => {
   modal.style.display = "flex";
@@ -87,9 +88,13 @@ const checkAnswer = () => {
             if (answerBtn.dataset.winner === 'true' && !buttonClicked){
             answerBtn.style.backgroundColor = "#98d03b"
             score ++
-            document.querySelector('.scoreCounter').textContent = score
+            guesses ++
+            document.querySelector('.scoreCounter').textContent = score + "/" + guesses
+            increment5(score)
             } else if (answerBtn.dataset.winner === 'false' && !buttonClicked) {
             answerBtn.style.backgroundColor = "#d94536"
+            guesses ++
+            document.querySelector('.scoreCounter').textContent = score + "/" + guesses
             } 
             answerBtns.forEach((button) => {
                 if(e.target != button) {
@@ -124,4 +129,15 @@ const disableButton = (button) => {
 const enableButton = (button) => {
   button.disabled = false
   button.style.opacity = 1
+}
+
+const increment5 = (score) => {
+  if (score %5 === 0) {
+    document.querySelector('.scoreContainer h5').style.fontSize = '2rem'
+    document.querySelector('.scoreContainer h5').style.color = '#D325BF'
+    setTimeout(() => {
+      document.querySelector('.scoreContainer h5').style.fontSize = '1rem'
+      document.querySelector('.scoreContainer h5').style.color = '#000000'
+    }, 750)
+  }
 }
