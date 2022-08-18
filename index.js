@@ -11,10 +11,29 @@ let score = 0
 let guesses = 0
 let counter = 30
 
+const playGame = () => {
+  fetch('quotes.json')
+  .then((data) => {
+  return data.json()
+})
+  .then((apiResponse) => {
+    disableButton(next_button)
+    shuffleArray(apiResponse.films)
+    let threeFilms = apiResponse.films.slice(0, 3)
+    let winningFilmObject = threeFilms[0]
+    shuffleArray(threeFilms)
+    removeLastMovies()
+    createQuote(winningFilmObject)
+    threeFilms.forEach(createTitleButtons)
+    checkAnswer()
+})
+}
+
 //start the game
 startBtn.addEventListener('click', () => {
     splashScreen.style.display = 'none'
     document.querySelector('main').style.visibility = 'visible'
+    playGame()
     score = 0
     guesses = 0
     counter = 30
@@ -23,7 +42,8 @@ startBtn.addEventListener('click', () => {
       if(counter === 0) {
         splashScreen.style.display = 'block'
         document.querySelector('main').style.visibility = 'hidden'
-          clearInterval(timer)
+        clearInterval(timer)
+        playGame()
       } else {
           counter--
           document.querySelector('#timer').textContent = counter
@@ -46,21 +66,6 @@ window.addEventListener('click', (e) => {
   if (e.target == modal) {
     modal.style.display = "none";
   }
-})
-
-fetch('quotes.json')
-  .then((data) => {
-  return data.json()
-})
-  .then((apiResponse) => {
-    disableButton(next_button)
-    shuffleArray(apiResponse.films)
-    let threeFilms = apiResponse.films.slice(0, 3)
-    let winningFilmObject = threeFilms[0]
-    shuffleArray(threeFilms)
-    createQuote(winningFilmObject)
-    threeFilms.forEach(createTitleButtons)
-    checkAnswer()
 })
 
 next_button.addEventListener('click', () => {
