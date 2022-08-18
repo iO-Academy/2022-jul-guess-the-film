@@ -9,6 +9,14 @@ let score = 0
 let guesses = 0
 let counter = 30
 
+let startBtn = document.querySelector('#startBtn')
+let splashScreen = document.querySelector('.splash')
+//start the game
+startBtn.addEventListener('click', () => {
+    splashScreen.style.display = 'none'
+    document.querySelector('main').style.visibility = 'visible'
+})
+
 hint.addEventListener('click', () => {
   hintAnswer.style.display = 'block'
   disableButton(hint)
