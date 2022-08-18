@@ -7,6 +7,7 @@ let hint = document.querySelector('#hint')
 let hintAnswer = document.querySelector('#hintAnswer')
 let score = 0
 let guesses = 0
+let counter = 30
 
 hint.addEventListener('click', () => {
   hintAnswer.style.display = 'block'
@@ -157,3 +158,13 @@ const increment5 = (score) => {
 const updateScore = (score, guesses) => {
   document.querySelector('.scoreCounter').textContent = score + "/" + guesses
 }
+
+const setTimer = setInterval(()=> {
+    if(counter === 0) {
+        clearInterval(timer)
+    } else {
+        counter--
+        // document.querySelector('#timer').textContent = counter
+        console.log(counter)
+    }
+}, 1000)
