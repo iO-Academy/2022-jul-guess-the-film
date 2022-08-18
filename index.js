@@ -15,6 +15,14 @@ let splashScreen = document.querySelector('.splash')
 startBtn.addEventListener('click', () => {
     splashScreen.style.display = 'none'
     document.querySelector('main').style.visibility = 'visible'
+    const timer = setInterval(()=> {
+      if(counter === 0) {
+          clearInterval(timer)
+      } else {
+          counter--
+          document.querySelector('#timer').textContent = counter
+      }
+  }, 1000)
 })
 
 hint.addEventListener('click', () => {
@@ -166,13 +174,3 @@ const increment5 = (score) => {
 const updateScore = (score, guesses) => {
   document.querySelector('.scoreCounter').textContent = score + "/" + guesses
 }
-
-const setTimer = setInterval(()=> {
-    if(counter === 0) {
-        clearInterval(timer)
-    } else {
-        counter--
-        // document.querySelector('#timer').textContent = counter
-        console.log(counter)
-    }
-}, 1000)
