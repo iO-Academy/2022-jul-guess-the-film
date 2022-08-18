@@ -7,16 +7,18 @@ let hint = document.querySelector('#hint')
 let hintAnswer = document.querySelector('#hintAnswer')
 let score = 0
 let guesses = 0
-let counter = 30
-
+let counter = 3
 let startBtn = document.querySelector('#startBtn')
 let splashScreen = document.querySelector('.splash')
+
 //start the game
 startBtn.addEventListener('click', () => {
     splashScreen.style.display = 'none'
     document.querySelector('main').style.visibility = 'visible'
     const timer = setInterval(()=> {
       if(counter === 0) {
+        splashScreen.style.display = 'block'
+        document.querySelector('main').style.visibility = 'hidden'
           clearInterval(timer)
       } else {
           counter--
