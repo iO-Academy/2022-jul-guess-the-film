@@ -5,14 +5,49 @@ let buttonClicked = false
 const next_button = document.getElementById('next')
 let hint = document.querySelector('#hint')
 let hintAnswer = document.querySelector('#hintAnswer')
-let score = 0
-let guesses = 0
 let startBtn = document.querySelector('#startBtn')
 let splashScreen = document.querySelector('.splash')
-//start the game
+let score = 0
+let guesses = 0
+let counter = 30
+
+const playGame = () => {
+  fetch('quotes.json')
+  .then((data) => {
+  return data.json()
+})
+  .then((apiResponse) => {
+    disableButton(next_button)
+    shuffleArray(apiResponse.films)
+    let threeFilms = apiResponse.films.slice(0, 3)
+    let winningFilmObject = threeFilms[0]
+    shuffleArray(threeFilms)
+    removeLastMovies()
+    createQuote(winningFilmObject)
+    threeFilms.forEach(createTitleButtons)
+    checkAnswer()
+})
+}
+
 startBtn.addEventListener('click', () => {
     splashScreen.style.display = 'none'
     document.querySelector('main').style.visibility = 'visible'
+    playGame()
+    score = 0
+    guesses = 0
+    counter = 30
+    updateScore(score, guesses)
+    const timer = setInterval(()=> {
+      if(counter === 0) {
+        splashScreen.style.display = 'block'
+        document.querySelector('main').style.visibility = 'hidden'
+        clearInterval(timer)
+        playGame()
+      } else {
+        counter--
+        document.querySelector('#timer').textContent = counter
+      }
+  }, 1000)
 })
 
 hint.addEventListener('click', () => {
@@ -30,21 +65,6 @@ window.addEventListener('click', (e) => {
   if (e.target == modal) {
     modal.style.display = "none";
   }
-})
-
-fetch('quotes.json')
-  .then((data) => {
-  return data.json()
-})
-  .then((apiResponse) => {
-    disableButton(next_button)
-    shuffleArray(apiResponse.films)
-    let threeFilms = apiResponse.films.slice(0, 3)
-    let winningFilmObject = threeFilms[0]
-    shuffleArray(threeFilms)
-    createQuote(winningFilmObject)
-    threeFilms.forEach(createTitleButtons)
-    checkAnswer()
 })
 
 next_button.addEventListener('click', () => {
@@ -152,11 +172,11 @@ const enableButton = (button) => {
 
 const increment5 = (score) => {
   if (score %5 === 0) {
-    document.querySelector('.scoreContainer h5').style.fontSize = '2rem'
-    document.querySelector('.scoreContainer h5').style.color = '#D325BF'
+    document.querySelector('.score').style.fontSize = '2rem'
+    document.querySelector('.score').style.color = '#D325BF'
     setTimeout(() => {
-      document.querySelector('.scoreContainer h5').style.fontSize = '1rem'
-      document.querySelector('.scoreContainer h5').style.color = '#000000'
+      document.querySelector('.score').style.fontSize = '1rem'
+      document.querySelector('.score').style.color = '#000000'
     }, 750)
   }
 }
