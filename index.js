@@ -8,9 +8,10 @@ let hintAnswer = document.querySelector('#hintAnswer')
 let score = 0
 let guesses = 0
 let startBtn = document.querySelector('#startBtn')
+let splashScreen = document.querySelector('.splash')
 //start the game
-startBtn.addEventListener('click', (e) => {
-    e.target.style.display = 'none'
+startBtn.addEventListener('click', () => {
+    splashScreen.style.display = 'none'
     document.querySelector('main').style.visibility = 'visible'
 })
 
