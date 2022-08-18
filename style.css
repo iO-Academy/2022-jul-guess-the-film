@@ -148,8 +148,6 @@ section {
     text-align: left;
   }
 
-
-  
   .close {
     color: #aaa;
     float: right;
@@ -178,3 +176,12 @@ section {
     margin-left: 25px;
     font-size: 1.4rem;
 }
+
+@media screen and (max-height: 500px) {
+    .modalContent {
+        height: 250px;
+        overflow: scroll;
+    }
+    
+}
+
