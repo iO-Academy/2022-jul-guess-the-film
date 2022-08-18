@@ -5,16 +5,22 @@ let buttonClicked = false
 const next_button = document.getElementById('next')
 let hint = document.querySelector('#hint')
 let hintAnswer = document.querySelector('#hintAnswer')
-let score = 0
-let guesses = 0
-let counter = 3
 let startBtn = document.querySelector('#startBtn')
 let splashScreen = document.querySelector('.splash')
+let score = 0
+let guesses = 0
+let counter = 30
 
 //start the game
 startBtn.addEventListener('click', () => {
     splashScreen.style.display = 'none'
     document.querySelector('main').style.visibility = 'visible'
+    score = 0
+    guesses = 0
+    counter = 30
+    console.log(score)
+    console.log(guesses)
+    updateScore(score, guesses)
     const timer = setInterval(()=> {
       if(counter === 0) {
         splashScreen.style.display = 'block'
@@ -164,11 +170,11 @@ const enableButton = (button) => {
 
 const increment5 = (score) => {
   if (score %5 === 0) {
-    document.querySelector('.scoreContainer h5').style.fontSize = '2rem'
-    document.querySelector('.scoreContainer h5').style.color = '#D325BF'
+    document.querySelector('.score').style.fontSize = '2rem'
+    document.querySelector('.score').style.color = '#D325BF'
     setTimeout(() => {
-      document.querySelector('.scoreContainer h5').style.fontSize = '1rem'
-      document.querySelector('.scoreContainer h5').style.color = '#000000'
+      document.querySelector('.score').style.fontSize = '1rem'
+      document.querySelector('.score').style.color = '#000000'
     }, 750)
   }
 }
