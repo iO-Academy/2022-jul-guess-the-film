@@ -60,6 +60,7 @@ section {
     margin: 20px 0 20px 0;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     min-height: 200px;
 }
@@ -67,7 +68,13 @@ section {
 .quoteContainer p {
     font-style: italic;
     width: 290px;
-    margin: 50px 20px;
+    margin: 50px 20px 30px;
+}
+
+#hintAnswer {
+    margin: 0 20px 20px;
+    font-weight: bold;
+    display: none;
 }
 
 .btnContainer {
@@ -77,7 +84,6 @@ section {
     width: 90%;
     height: 275px;
     justify-content: space-evenly;
-
 }
 
 .btnContainer button {
@@ -90,21 +96,29 @@ section {
     background-color: #ffffff;
 }
 
-.nextBtn {
+.nextHintContainer {
     display: flex;
     align-items: center;
     width: 90%;
     height: 10vh;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 0 10px; 
 }
 
-.nextBtn button {
+.nextHintContainer button {
     height: 40px;
     width: 75px;
     border-color: #B7B7B7;
     border-radius: 20px;
     margin-bottom: 15px;
     background-color: #ffffff;
+    font-weight: bold;
+    font-family: 'marker felt';
+}
+
+#hint {
+    background-color: #D325BF;
+    color: #ffffff;
 }
 
 .instructionsModal {
@@ -128,12 +142,12 @@ section {
     padding: 20px;
     border: 1px solid #b7b7b7;
     width: 350px; 
-    height: 300px;
+    height: 450px;
     border-radius: 10px;
-    font-size: 12px;
+    font-size: 1rem;
     text-align: left;
   }
-  
+
   .close {
     color: #aaa;
     float: right;
@@ -161,6 +175,13 @@ section {
     margin-bottom: 20px;
     margin-left: 25px;
     font-size: 1.4rem;
+}
+
+@media screen and (max-height: 500px) {
+    .modalContent {
+        height: 250px;
+        overflow: scroll;
+    }
 }
 
 .scoreContainer {

@@ -3,8 +3,15 @@ const btn = document.getElementById("instructionsModalBtn");
 const span = document.getElementsByClassName("close")[0];
 let buttonClicked = false
 const next_button = document.getElementById('next')
+let hint = document.querySelector('#hint')
+let hintAnswer = document.querySelector('#hintAnswer')
 let score = 0
 let guesses = 0
+
+hint.addEventListener('click', () => {
+  hintAnswer.style.display = 'block'
+  disableButton(hint)
+  })
 
 btn.addEventListener('click', () => {
   modal.style.display = "flex";
@@ -33,9 +40,11 @@ fetch('quotes.json')
     checkAnswer()
 })
 
-
 next_button.addEventListener('click', () => {
     lastQuote = document.getElementById('quote').textContent
+    hintAnswer.style.display = 'none'
+    enableButton(hint)
+    
     fetch('quotes.json')
     .then((data) => {
         return data.json()
@@ -59,6 +68,7 @@ next_button.addEventListener('click', () => {
 const removeLastMovies = () => {
   buttonClicked = false
   document.querySelector('#quote').innerHTML = ''
+  hintAnswer.innerHTML = 'Release Year: '
   let buttons = document.querySelectorAll('.answerBtn')
     buttons.forEach((button) => {
       button.remove()
@@ -82,33 +92,35 @@ const createTitleButtons = (oneFilm) => {
 const checkAnswer = () => {
   let answerBtns = document.querySelectorAll('.answerBtn')
   answerBtns.forEach((answerBtn) => {
-        answerBtn.addEventListener('click', (e) => {
-            answerBtns.disabled = true
-            enableButton(next_button)
-            if (answerBtn.dataset.winner === 'true' && !buttonClicked){
-            answerBtn.style.backgroundColor = "#98d03b"
-            score ++
-            guesses ++
-            updateScore(score, guesses)
-            increment5(score)
-            } else if (answerBtn.dataset.winner === 'false' && !buttonClicked) {
-            answerBtn.style.backgroundColor = "#d94536"
-            guesses ++
-            updateScore(score, guesses)
-            } 
-            answerBtns.forEach((button) => {
-                if(e.target != button) {
-                    disableButton(button)
-                }
-            })
-            buttonClicked = true
-        })
+    answerBtn.addEventListener('click', (e) => {
+      answerBtns.disabled = true
+      enableButton(next_button)
+      if (answerBtn.dataset.winner === 'true' && !buttonClicked){
+        answerBtn.style.backgroundColor = "#98d03b"
+        score ++
+        guesses ++
+        updateScore(score, guesses)
+        increment5(score)
+      } else if (answerBtn.dataset.winner === 'false' && !buttonClicked) {
+        answerBtn.style.backgroundColor = "#d94536"
+        guesses ++
+        updateScore(score, guesses)
+      } 
+      answerBtns.forEach((button) => {
+        if(e.target != button) {
+          disableButton(button)
+        }
+      })
+        buttonClicked = true
+      })
     })
 }
 
 const createQuote = (winningFilmObject) => {
   let p_text = document.createTextNode(winningFilmObject.quote)
   document.querySelector('#quote').appendChild(p_text)
+  let hint_text = document.createTextNode(winningFilmObject.year)
+  hintAnswer.appendChild(hint_text)
 }
 
 const shuffleArray = (array) => {
