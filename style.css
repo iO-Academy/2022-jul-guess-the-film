@@ -166,7 +166,7 @@ section {
 .scoreContainer {
     min-height: 5vh;
     width: 100%;
-    background-color: #D9D8DA;
+    background-color: #b7b7b7;
     display: flex;
     justify-content: center;
 }
