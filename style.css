@@ -84,7 +84,6 @@ section {
     width: 90%;
     height: 275px;
     justify-content: space-evenly;
-
 }
 
 .btnContainer button {
@@ -183,6 +182,4 @@ section {
         height: 250px;
         overflow: scroll;
     }
-    
 }
-
