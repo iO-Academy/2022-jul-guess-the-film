@@ -7,6 +7,12 @@ let hint = document.querySelector('#hint')
 let hintAnswer = document.querySelector('#hintAnswer')
 let score = 0
 let guesses = 0
+let startBtn = document.querySelector('#startBtn')
+//start the game
+startBtn.addEventListener('click', (e) => {
+    e.target.style.display = 'none'
+    document.querySelector('main').style.visibility = 'visible'
+})
 
 hint.addEventListener('click', () => {
   hintAnswer.style.display = 'block'

@@ -18,6 +18,7 @@ body {
 
 main {
     width: 357px;
+    visibility: hidden;
 }
 
 header {
