@@ -134,6 +134,6 @@ const increment5 = (score) => {
     setTimeout(() => {
       document.querySelector('.scoreContainer h5').style.fontSize = '1rem'
       document.querySelector('.scoreContainer h5').style.color = '#000000'
-    }, 2000)
+    }, 750)
   }
 }
