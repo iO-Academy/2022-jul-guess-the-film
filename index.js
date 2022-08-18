@@ -129,11 +129,11 @@ const enableButton = (button) => {
 
 const increment5 = (score) => {
   if (score %5 === 0) {
-    document.querySelector('.scoreCounter').style.fontSize = '2rem'
-    document.querySelector('.scoreCounter').style.color = '#7274ce'
+    document.querySelector('.scoreContainer h5').style.fontSize = '2rem'
+    document.querySelector('.scoreContainer h5').style.color = '#D325BF'
     setTimeout(() => {
-      document.querySelector('.scoreCounter').style.fontSize = '1rem'
-      document.querySelector('.scoreCounter').style.color = '#000000'
+      document.querySelector('.scoreContainer h5').style.fontSize = '1rem'
+      document.querySelector('.scoreContainer h5').style.color = '#000000'
     }, 2000)
   }
 }
