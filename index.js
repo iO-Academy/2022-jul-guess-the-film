@@ -44,8 +44,8 @@ startBtn.addEventListener('click', () => {
         clearInterval(timer)
         playGame()
       } else {
-          counter--
-          document.querySelector('#timer').textContent = counter
+        counter--
+        document.querySelector('#timer').textContent = counter
       }
   }, 1000)
 })
