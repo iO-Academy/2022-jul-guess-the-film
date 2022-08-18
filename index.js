@@ -4,6 +4,7 @@ const span = document.getElementsByClassName("close")[0];
 let buttonClicked = false
 const next_button = document.getElementById('next')
 let score = 0
+let guesses = 0
 
 btn.addEventListener('click', () => {
   modal.style.display = "flex";
@@ -87,10 +88,13 @@ const checkAnswer = () => {
             if (answerBtn.dataset.winner === 'true' && !buttonClicked){
             answerBtn.style.backgroundColor = "#98d03b"
             score ++
-            document.querySelector('.scoreCounter').textContent = score
+            guesses ++
+            document.querySelector('.scoreCounter').textContent = score + "/" + guesses
             increment5(score)
             } else if (answerBtn.dataset.winner === 'false' && !buttonClicked) {
             answerBtn.style.backgroundColor = "#d94536"
+            guesses ++
+            document.querySelector('.scoreCounter').textContent = score + "/" + guesses
             } 
             answerBtns.forEach((button) => {
                 if(e.target != button) {
