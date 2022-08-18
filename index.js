@@ -89,12 +89,12 @@ const checkAnswer = () => {
             answerBtn.style.backgroundColor = "#98d03b"
             score ++
             guesses ++
-            document.querySelector('.scoreCounter').textContent = score + "/" + guesses
+            updateScore(score, guesses)
             increment5(score)
             } else if (answerBtn.dataset.winner === 'false' && !buttonClicked) {
             answerBtn.style.backgroundColor = "#d94536"
             guesses ++
-            document.querySelector('.scoreCounter').textContent = score + "/" + guesses
+            updateScore(score, guesses)
             } 
             answerBtns.forEach((button) => {
                 if(e.target != button) {
@@ -140,4 +140,8 @@ const increment5 = (score) => {
       document.querySelector('.scoreContainer h5').style.color = '#000000'
     }, 750)
   }
+}
+
+const updateScore = (score, guesses) => {
+  document.querySelector('.scoreCounter').textContent = score + "/" + guesses
 }
